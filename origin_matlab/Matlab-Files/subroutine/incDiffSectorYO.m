@@ -1,0 +1,26 @@
+% This subroutine calculates income differences conditional on being young
+% or old.
+%
+% Used in the paper "Land Insecurity and Mobility Frictions," by Tasso
+% Adamopoulos, Loren Brandt, Chaoran Chen, Diego Restuccia, and Xiaoyun
+% Wei, prepared for publication at the Quarterly Journal of Economics.
+%
+% Last modified: March 3, 2024
+
+inc_diff_ur_y = sum(sum(log(ind_h*wu).*(dummy_urban+dummy_pt_u).*(1-dummy_old)))...
+    /(sum(sum((dummy_urban+dummy_pt_u).*(1-dummy_old)))+eps) - ...
+    sum(sum(log(ind_h*wr).*(dummy_rural+dummy_pt_r).*(1-dummy_old)))...
+    /(sum(sum((dummy_rural+dummy_pt_r).*(1-dummy_old)))+eps);
+
+inc_diff_ur_o = sum(sum(log(ind_h*wu).*(dummy_urban+dummy_pt_u).*(dummy_old)))...
+    /(sum(sum((dummy_urban+dummy_pt_u).*(dummy_old)))+eps) - ...
+    sum(sum(log(ind_h*wr).*(dummy_rural+dummy_pt_r).*(dummy_old)))...
+    /(sum(sum((dummy_rural+dummy_pt_r).*(dummy_old)))+eps);
+
+
+
+inc_diff_ra_y = sum(sum((log(ind_h*wr).*(dummy_rural+dummy_pt_r).*(1-dummy_old))))...
+    /(sum(sum((dummy_rural+dummy_pt_r).*(1-dummy_old)))+eps) - log(wa);
+
+inc_diff_ra_o = sum(sum((log(ind_h*wr).*(dummy_rural+dummy_pt_r).*dummy_old)))...
+    /(sum(sum((dummy_rural+dummy_pt_r).*dummy_old))+eps) - log(wa);
